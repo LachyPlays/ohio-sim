@@ -24,9 +24,9 @@ public class PlayerMovment : MonoBehaviour
 
 
     public float sprintSpeed;
-    private float MaxSprintSpeed;
+    public float MaxSprintSpeed;
     //public float sprintCooldown = 3;
-    float holder;
+    public float holder = 5;
     private bool isSprinting;
     private bool canSprint;
 
@@ -37,8 +37,7 @@ public class PlayerMovment : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
-    float saveSpeed;
-    private float sprintAmount;
+    public float sprintAmount;
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -57,20 +56,25 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
+        
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        MyInput();
+
+
+        if (sprintAmount <= 0)
+            moveSpeed = holder;
+       
         if (isSprinting)
         {
             if(sprintAmount >= MaxSprintSpeed)
             {
                 sprintAmount = MaxSprintSpeed;
-                sprintSpeed = MaxSprintSpeed;
+                
 
             }
             if (sprintAmount <= 0)
             {
                 sprintAmount = 0;
-                sprintSpeed = 0;
+                
 
             }
             sprintAmount -= 0.01f;
@@ -80,7 +84,7 @@ public class PlayerMovment : MonoBehaviour
             if (sprintAmount >= MaxSprintSpeed)
             {
                 sprintAmount = MaxSprintSpeed;
-                sprintSpeed = MaxSprintSpeed;
+               
                
                 
             }
@@ -99,14 +103,15 @@ public class PlayerMovment : MonoBehaviour
             }
 
         }
- 
 
-       
+        MyInput();
         SpeedControl();
         if (grounded)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+       // Debug.Log(sprintAmount);
+        
     }
 
     private void FixedUpdate()
@@ -126,41 +131,51 @@ public class PlayerMovment : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(sprintKey) && grounded)
+
+        if (Input.GetKeyDown(sprintKey) && grounded && isSprinting == false)
         {
             isSprinting = true;
-            if (sprintAmount <= 0)
+            StopAllCoroutines();
+            if (sprintAmount == 0)
             {
                 moveSpeed = holder;
                 sprintAmount = 0;
-                sprintSpeed = 0;
-                
+
+
             }
-            else
+            else if (sprintAmount < 0)
             {
-                StopAllCoroutines();
-                moveSpeed = sprintSpeed;
-                
+                moveSpeed = holder;
+                sprintAmount = 0;
+
+
             }
-      
+            else if (sprintAmount > 0)
+            {
+                moveSpeed = sprintSpeed;
+
+
+            }
         }
         else if (Input.GetKeyUp(sprintKey))
         {
             moveSpeed = holder;
-            isSprinting =false;
+            isSprinting = false;
         }
+
+
 
     }
     IEnumerator three()
     {
         yield return new WaitForSeconds(3);
-        sprintAmount += 0.1f;
+        sprintAmount += 0.01f;
     }
 
     IEnumerator Six()
     {
         yield return new WaitForSeconds(6);
-        sprintAmount += 0.1f;
+        sprintAmount += 0.01f;
     }
 
     void MovePlayer()
