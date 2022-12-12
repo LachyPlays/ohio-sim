@@ -132,7 +132,7 @@ public class PlayerMovment : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(sprintKey) && grounded && isSprinting == false)
+        if (Input.GetKeyDown(sprintKey) && isSprinting == false)
         {
             isSprinting = true;
             StopAllCoroutines();
