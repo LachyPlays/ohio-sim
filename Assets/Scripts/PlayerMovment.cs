@@ -50,56 +50,56 @@ public class PlayerMovment : MonoBehaviour
         MaxSprintSpeed = sprintSpeed;
         sprintAmount = sprintSpeed;
         holder = moveSpeed;
-        
+
     }
 
 
     void Update()
     {
-        
+
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
 
         if (sprintAmount <= 0)
             moveSpeed = holder;
-       
+
         if (isSprinting)
         {
-            if(sprintAmount >= MaxSprintSpeed)
+            if (sprintAmount >= MaxSprintSpeed)
             {
                 sprintAmount = MaxSprintSpeed;
-                
+
 
             }
             if (sprintAmount <= 0)
             {
                 sprintAmount = 0;
-                
+
 
             }
             sprintAmount -= 0.01f;
         }
-        else if(isSprinting == false)
+        else if (isSprinting == false)
         {
             if (sprintAmount >= MaxSprintSpeed)
             {
                 sprintAmount = MaxSprintSpeed;
-               
-               
-                
+
+
+
             }
 
             if (sprintAmount <= 0)
             {
-                sprintAmount= 0;
+                sprintAmount = 0;
                 StartCoroutine(Six());
-              
+
             }
 
             if (sprintSpeed > 0)
             {
                 StartCoroutine(three());
-               
+
             }
 
         }
@@ -110,8 +110,8 @@ public class PlayerMovment : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
-       // Debug.Log(sprintAmount);
-        
+        // Debug.Log(sprintAmount);
+
     }
 
     private void FixedUpdate()
@@ -123,7 +123,7 @@ public class PlayerMovment : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        if(Input.GetKey(jumpKey)  && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
@@ -181,16 +181,16 @@ public class PlayerMovment : MonoBehaviour
     void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        if(grounded)
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if (grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         else if (!grounded)
-          rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     void SpeedControl()
     {
         Vector3 fatval = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if(fatval.magnitude > moveSpeed)
+        if (fatval.magnitude > moveSpeed)
         {
             Vector3 limitedVel = fatval.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
@@ -208,7 +208,7 @@ public class PlayerMovment : MonoBehaviour
     {
         readyToJump = true;
     }
-   
+
 
 
 
