@@ -46,6 +46,17 @@ public class PlayerMovementV2 : MonoBehaviour
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    // Sprint
+    public float sprintSpeed;
+    public float MaxSprintSpeed;
+    //public float sprintCooldown = 3;
+    public float holder = 5;
+    private bool isSprinting;
+    private bool canSprint;
+    public float sprintAmount;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,6 +67,10 @@ public class PlayerMovementV2 : MonoBehaviour
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        sprintSpeed = moveSpeed * 5;
+        sprintAmount = 15;
+        MaxSprintSpeed = sprintAmount;
+        holder = moveSpeed;
     }
 
 
@@ -85,6 +100,39 @@ public class PlayerMovementV2 : MonoBehaviour
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+
+
+        if (Input.GetKeyDown(sprintKey) && isSprinting == false)
+        {
+            isSprinting = true;
+            StopAllCoroutines();
+            if (sprintAmount == 0)
+            {
+                moveSpeed = holder;
+                sprintAmount = 0;
+
+
+            }
+            else if (sprintAmount < 0)
+            {
+                moveSpeed = holder;
+                sprintAmount = 0;
+
+
+            }
+            else if (sprintAmount > 0)
+            {
+                moveSpeed = sprintSpeed;
+            
+
+            }
+        }
+        else if (Input.GetKeyUp(sprintKey))
+        {
+            isSprinting = false;
+            moveSpeed = holder;
+            
+        }
     }
 
     private void StartCrouch()
@@ -153,6 +201,50 @@ public class PlayerMovementV2 : MonoBehaviour
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+        
+        if (sprintAmount <= 0)
+            moveSpeed = holder;
+
+        if (isSprinting)
+        {
+            if (sprintAmount >= MaxSprintSpeed)
+            {
+                sprintAmount = MaxSprintSpeed;
+                 
+
+            }
+            if (sprintAmount <= 0)
+            {
+                sprintAmount = 0;
+
+
+            }
+            sprintAmount -= 0.01f;
+        }
+        else if (isSprinting == false)
+        {
+            if (sprintAmount >= MaxSprintSpeed)
+            {
+                sprintAmount = MaxSprintSpeed;
+
+
+
+            }
+
+            if (sprintAmount <= 0)
+            {
+                sprintAmount = 0;
+                StartCoroutine(Six());
+
+            }
+
+            if (sprintSpeed > 0)
+            {
+                StartCoroutine(three());
+
+            }
+
+        }
     }
 
     private void Jump()
@@ -294,4 +386,17 @@ public class PlayerMovementV2 : MonoBehaviour
     {
         grounded = false;
     }
+
+    IEnumerator three()
+    {
+        yield return new WaitForSeconds(3);
+        sprintAmount += 0.01f;
+    }
+
+    IEnumerator Six()
+    {
+        yield return new WaitForSeconds(6);
+        sprintAmount += 0.01f;
+    }
+
 }

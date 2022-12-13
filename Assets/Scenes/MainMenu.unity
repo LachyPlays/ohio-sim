@@ -540,7 +540,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 888491771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3bc6d9487303d46acb46e78984678b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d9207546bc14b944be395ceefdb97c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1053175428
@@ -765,7 +765,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 888491776}
-        m_TargetAssemblyTypeName: ChangeScence, Assembly-CSharp
+        m_TargetAssemblyTypeName: Change, Assembly-CSharp
         m_MethodName: loading
         m_Mode: 1
         m_Arguments:
