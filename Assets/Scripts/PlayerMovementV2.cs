@@ -117,8 +117,6 @@ public class PlayerMovementV2 : MonoBehaviour
             {
                 moveSpeed = holder;
                 sprintAmount = 0;
-
-
             }
             else if (sprintAmount > 0)
             {
