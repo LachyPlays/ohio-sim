@@ -217,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &365854613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +771,8 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8823895262681092565, guid: 93dfea5c2bedc844ca5f26b895e4a7cc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 93dfea5c2bedc844ca5f26b895e4a7cc, type: 3}
 --- !u!1 &2140209439 stripped
 GameObject:
