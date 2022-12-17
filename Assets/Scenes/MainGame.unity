@@ -689,7 +689,7 @@ MonoBehaviour:
   rotationY: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   isGrounded: 1
 --- !u!20 &1472283556
 Camera:
