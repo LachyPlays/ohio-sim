@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -13,12 +14,20 @@ public class PlayerMovementV3 : MonoBehaviour
     public float jumpForce = 100f;
     public float drag = 8f;
 
+    [Header("Camera")]
+    public float sensitivity = 1f;
+    [SerializeField]
+    private float rotationX = 0.0f;
+    [SerializeField]
+    private float rotationY = 0.0f;
+
     [Header("Collision")]
     public LayerMask groundMask;
     [SerializeField]
     private bool isGrounded = true;
 
     private Rigidbody rb;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +35,46 @@ public class PlayerMovementV3 : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.drag = drag;
         accel *= (drag / 2);
+
+        cam = GetComponent<Camera>();
+        cam.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
+    // Fixed update is called at a set interval, regardless of the frametime
     void FixedUpdate()
     {
+        CamMovement();
         Movement();
         CounterMovement();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            } else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+    }
+
+    private void CamMovement()
+    {
+        // Fetch the mouse axis
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+
+        rotationY += mouseX;
+        rotationX -= mouseY;
+        rotationX = Mathf.Clamp(rotationX, -90, 90);
+
+        cam.transform.eulerAngles = new Vector3(rotationX, rotationY, 0.0f);
     }
 
     private void Movement()
