@@ -20,10 +20,8 @@ public class PlayerMovementV3 : MonoBehaviour
     public float sprintTime = 5f;
     public float sprintRegenRate = 0.1f;
     public float sprintCooldown = 3f;
-    [SerializeField]
-    private float sprintRemaining;
-    [SerializeField]
-    private bool isCoolingDown = false;
+    public float sprintRemaining;
+    public bool isCoolingDown = false;
 
     [Header("Camera")]
     public float sensitivity = 8f;
