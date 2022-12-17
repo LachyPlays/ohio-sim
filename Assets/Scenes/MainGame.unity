@@ -423,7 +423,7 @@ MonoBehaviour:
   accel: 80
   jumpForce: 150
   drag: 7
-  sensitivity: 5
+  sensitivity: 8
   rotationX: 0
   rotationY: 0
   groundMask:

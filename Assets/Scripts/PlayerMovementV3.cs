@@ -15,7 +15,7 @@ public class PlayerMovementV3 : MonoBehaviour
     public float drag = 8f;
 
     [Header("Camera")]
-    public float sensitivity = 1f;
+    public float sensitivity = 8f;
     [SerializeField]
     private float rotationX = 0.0f;
     [SerializeField]
