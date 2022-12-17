@@ -47,19 +47,20 @@ public class PlayerMovementV2 : MonoBehaviour
     private Vector3 wallNormalVector;
 
     // Sprint
-    public float sprintSpeed;
+    public float sprintSpeed = 30;
     public float MaxSprintSpeed;
-    //public float sprintCooldown = 3;
-    public float holder = 5;
+    public float sprintCooldown = 3;
     private bool isSprinting;
     private bool canSprint;
     public float sprintAmount;
+    public float currentSpeed;
     public KeyCode sprintKey = KeyCode.LeftShift;
 
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        currentSpeed = maxSpeed;
     }
 
     void Start()
@@ -70,9 +71,7 @@ public class PlayerMovementV2 : MonoBehaviour
         sprintSpeed = moveSpeed * 5;
         sprintAmount = 15;
         MaxSprintSpeed = sprintAmount;
-        holder = moveSpeed;
     }
-
 
     private void FixedUpdate()
     {
@@ -103,9 +102,10 @@ public class PlayerMovementV2 : MonoBehaviour
 
 
         if (Input.GetKeyDown(sprintKey) && isSprinting == false)
-        {
+        {   
             isSprinting = true;
             StopAllCoroutines();
+<<<<<<< HEAD
             if (sprintAmount == 0)
             {
                 moveSpeed = holder;
@@ -124,12 +124,12 @@ public class PlayerMovementV2 : MonoBehaviour
             
 
             }
+
+>>>>>>> 62746d3048b3e49841476016923880e2f75ad414
         }
         else if (Input.GetKeyUp(sprintKey))
         {
             isSprinting = false;
-            moveSpeed = holder;
-            
         }
     }
 
@@ -199,9 +199,6 @@ public class PlayerMovementV2 : MonoBehaviour
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
-        
-        if (sprintAmount <= 0)
-            moveSpeed = holder;
 
         if (isSprinting)
         {
