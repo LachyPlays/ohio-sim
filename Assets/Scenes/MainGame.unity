@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 888491773}
   - component: {fileID: 888491772}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Player UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,10 +680,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7121c21e80bb614484bd138345ad426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  accel: 80
+  maxSpeed: 7
+  accel: 70
   jumpForce: 100
   drag: 8
+  sprintSpeed: 15
+  sprintAccelMultiplier: 1.2
+  sprintTime: 5
+  sprintRegenRate: 1
+  sprintCooldown: 3
+  sprintRemaining: 0
+  isCoolingDown: 0
   sensitivity: 8
   rotationX: 0
   rotationY: 0
