@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject Global_Volume;
+    public GameObject cam;
+    public float y;
+    public GameObject video;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,10 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            video.SetActive(false);
+        }
     }
 
     public void Highs()
@@ -41,4 +47,8 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainGame");
     }
+
+   
+    
+   
 }
