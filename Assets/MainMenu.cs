@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public GameObject cam;
     public float y;
     public GameObject video;
+    public GameObject main_menu;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class MainMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             video.SetActive(false);
+            main_menu.SetActive(true);
         }
     }
 
