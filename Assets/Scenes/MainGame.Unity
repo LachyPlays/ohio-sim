@@ -979,7 +979,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 1
+<<<<<<< HEAD
   cam: {fileID: 0}
+=======
+>>>>>>> parent of 2b8faf1 (MainMenu Bug Fixed)
 --- !u!20 &1472283556
 Camera:
   m_ObjectHideFlags: 0
@@ -1355,4 +1358,8 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
+<<<<<<< HEAD
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+  m_Pivot: {x: 0.5, y: 0.5}
+>>>>>>> parent of 2b8faf1 (MainMenu Bug Fixed)
