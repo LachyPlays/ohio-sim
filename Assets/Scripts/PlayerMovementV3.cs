@@ -36,7 +36,7 @@ public class PlayerMovementV3 : MonoBehaviour
     private bool isGrounded = true;
 
     private Rigidbody rb;
-    public Camera cam;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
